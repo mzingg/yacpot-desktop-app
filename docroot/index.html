@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YACPOT</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+</head>
+<body>
+
+<div id="yacpot-application">
+
+  <div v-component="yacpot-login-form" class="container">
+    <form class="form-signin" role="form">
+      <h2 class="form-signin-heading">Please sign in</h2>
+      <input type="email" class="form-control" placeholder="Email address" required autofocus>
+      <input type="password" class="form-control" placeholder="Password" required>
+      <label class="checkbox">
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+  </div>
+
+  <nav v-component="yacpot-global-navigation" class="navbar navbar-default" role="navigation" style="display: none;">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">{{brandName}}</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-navbar">
+        <ul class="nav navbar-nav">
+          <li class="dropdown active">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{selectedCommunity.label}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li v-repeat="communities" v-on="click: selectCommunity"><a href="#">{{label}}</a></li>
+            </ul>
+          </li>
+          <li><a href="#" v-on="click: openAdministration">Administration</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eingeloggt als {{user.name}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Profil bearbeiten</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Abmelden</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div v-component="yacpot-community-browser" class="container" style="display: none;">
+    <div class="row">
+      <div class="col-md-3">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Verfügbare Räume</h3>
+          </div>
+          <div class="panel-body">
+            Panel content
+          </div>
+          <div class="list-group">
+            <a href="#" class="list-group-item">Lobby <span class="badge">14</span></a>
+            <a href="#" class="list-group-item active">Raids <span class="badge">1</span></a>
+            <a href="#" class="list-group-item">Mehr ... <span class="badge">100</span></a>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Labels</h3>
+          </div>
+          <div class="panel-body">
+            Panel content
+          </div>
+          <div class="list-group">
+            <a href="#" class="list-group-item">Stammgruppe <span class="badge">2</span></a>
+            <a href="#" class="list-group-item">Classic Raid <span class="badge">1</span></a>
+            <a href="#" class="list-group-item">Mehr ... <span class="badge">42</span></a>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-9">
+        <div class="page-header">
+          <h1>{{selectedCommunity.label}} - Raids
+            <small>Semper Fidelis </small>
+          </h1>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+
+<script src="js/vue.js"></script>
+<script src="app/main.js"></script>
+
+</body>
+</html>
