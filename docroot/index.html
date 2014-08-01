@@ -15,10 +15,10 @@
 <div id="yacpot-application">
 
   <div v-component="yacpot-login-form" class="container">
-    <form class="form-signin" role="form">
+    <form class="form-signin" role="form" v-on="submit: doLogin">
       <h2 class="form-signin-heading">Please sign in</h2>
-      <input type="email" class="form-control" placeholder="Email address" required autofocus>
-      <input type="password" class="form-control" placeholder="Password" required>
+      <input type="email" class="form-control" placeholder="Email address" required autofocus v-model="email">
+      <input type="password" class="form-control" placeholder="Password" required v-model="password">
       <label class="checkbox">
         <input type="checkbox" value="remember-me"> Remember me
       </label>
@@ -26,7 +26,7 @@
     </form>
   </div>
 
-  <nav v-component="yacpot-global-navigation" class="navbar navbar-default" role="navigation" style="display: none;">
+  <nav v-component="yacpot-global-navigation" class="navbar navbar-default" role="navigation" style="display: none;" v-ref="navigation">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -52,7 +52,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eingeloggt als {{user.name}} <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eingeloggt als {{userName}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="#">Profil bearbeiten</a></li>
               <li class="divider"></li>
@@ -64,7 +64,7 @@
     </div>
   </nav>
 
-  <div v-component="yacpot-community-browser" class="container" style="display: none;">
+  <div v-component="yacpot-community-browser" class="container" style="display: none;" v-ref="browser">
     <div class="row">
       <div class="col-md-3">
 
@@ -100,7 +100,7 @@
       <div class="col-md-9">
         <div class="page-header">
           <h1>{{selectedCommunity.label}} - Raids
-            <small>Semper Fidelis </small>
+            <small>Semper Fidelis</small>
           </h1>
         </div>
         <div class="panel panel-default">
@@ -120,11 +120,11 @@
 <script src="js/bootstrap.min.js"></script>
 
 <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/pbkdf2.js"></script>
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha512.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha256.js"></script>
 
 <script src="app/yacpot.js"></script>
 
-<script src="js/vue.js"></script>
+<script src="js/vue.min.js"></script>
 <script src="app/main.js"></script>
 
 </body>

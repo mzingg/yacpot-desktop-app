@@ -1,4 +1,4 @@
-(function(exports) {
+(function (exports) {
 
     var communityList = [
         {id: '1', label: 'Community 1'},
@@ -6,12 +6,33 @@
         {id: '3', label: 'Community 3'}
     ];
 
+    Vue.component('yacpot-login-form', {
+        methods: {
+            doLogin: function (e) {
+                var self = e.targetVM;
+                e.preventDefault();
+                yacpot.authenticate(
+                    self.email,
+                    self.password,
+                    function () {
+                        $(self.$el).hide();
+                        $(self.$root.$.navigation.$el).show();
+                        $(self.$root.$.browser.$el).show();
+                    },
+                    function () {
+                        console.log('Error');
+                    }
+                )
+            }
+        }
+    });
+
     Vue.component('yacpot-global-navigation', {
         methods: {
-            openAdministration: function(e) {
+            openAdministration: function (e) {
                 console.log('openAdministration not yet implemented!');
             },
-            selectCommunity: function(e) {
+            selectCommunity: function (e) {
                 this.$dispatch('community-changed', e.targetVM.$data);
             }
         }
@@ -26,17 +47,21 @@
         el: '#yacpot-application',
         data: {
             brandName: 'YACPOT',
-            user: {
-                id: 'mzingg@gmx.net',
-                name: 'Markus Zingg'
-            },
             selectedCommunity: communityList[0],
             communities: communityList
         },
-        created: function() {
+        computed: {
+            userId: function () {
+                return yacpot.userId;
+            },
+            userName: function () {
+                return yacpot.userId;
+            }
+        },
+        created: function () {
             document.title = this.brandName;
-            this.$on('community-changed', function($newCommunityModel) {
-               this.selectedCommunity = $newCommunityModel;
+            this.$on('community-changed', function ($newCommunityModel) {
+                this.selectedCommunity = $newCommunityModel;
             });
         }
     });
